@@ -11,10 +11,10 @@
 
 		function database()
 		{
-			$servername = "localhost";
+			$servername = "mariadb";
 			$username = "root";
-			$password = "";
-			$dbname = "test_framework";
+			$password = "12345";
+			$dbname = "iso";
 
 			// Create connection
 			$conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -30,32 +30,35 @@
 
 		function database_name()
 		{
-			return 'test_framework';
+			return 'iso';
 		}
 
 
 		function folder_project()
 		{
-			$folder_project = 'piiyel19';
+			$folder_project = 'iso';
 			return $folder_project;
 		}
 
 		function root_source()
 		{
 			$root_source = $_SERVER['DOCUMENT_ROOT'];
-			return $root_source.'/'.$this->folder_project();
+			//return $root_source.'/'.$this->folder_project();
+			return $root_source;
 		}
 
 		function base_url()
 		{
-			$base = 'http://localhost/';
-			$base_url = $base.$this->folder_project();
+			$base = 'http://207.154.248.170/';
+			// $base_url = $base.$this->folder_project().'/';
+			$base_url = $base;
+			return $base_url;
 		}
 
 
 		function redirect($path)
 		{
-			header("Location: http://localhost/piiyel19/".$path); 
+			header("Location: http://207.154.248.170/".$path); 
             exit; // <- don't forget this!
 		}
 

@@ -1,30 +1,33 @@
 <?php
 
-    $url = isset($_SERVER['PATH_INFO']) ? explode('/', ltrim($_SERVER['PATH_INFO'],'/')) : '/';
+    $url = isset($_SERVER['REQUEST_URI']) ? explode('/', ltrim($_SERVER['REQUEST_URI'],'/')) : '/';
+
+    //var_dump($_SERVER['DOCUMENT_ROOT']); exit();
 
     /* SET SYSTEM REQUIREMENT */
-    include_once($_SERVER['DOCUMENT_ROOT'].'/piiyel19/System/Config.php');
+    include_once('System/Config.php');
     $config = '';
     $base_url = '';
     $root = '';
     $config = new Config();
     $root = $config->root_source();
     $base_url = $config->base_url();
+    //var_dump($root.'/Views/templates/ui-engine/Template.php');exit();
     include_once($root.'/System/Query.php');
     include_once($root.'/System/Security.php');
-    include $root.'/views/templates/ui-engine/Template.php'; 
+    include_once($root.'/Views/templates/ui-engine/Template.php'); 
     include_once($root.'/System/View.php');
-    include_once($root.'/System/Blockchain.php');
+    include_once($root.'/System/BlockChain.php');
     include_once($root.'/Migrations/Migration.php');
     /* END */
 
 
 
+    //var_dump($url[0]); //exit();
     
-
-    if ($url == '/')
+    if ($url[0] == '')
     {
-
+        //echo 'a';
         // This is the home page
         // Initiate the home controller
         // and render the home view
@@ -37,11 +40,13 @@
         $indexController = New IndexController($indexModel);
         $indexView = New IndexView($indexController, $indexModel);
 
+        
+
         print $indexView->index();
 
     }else{
-
-
+        
+        
         // This is not home page
         // Initiate the appropriate controller
         // and render the required view
@@ -60,6 +65,9 @@
         // Check if controller exists. NB: 
         // You have to do that for the model and the view too
         $ctrlPath = __DIR__.'/Controllers/'.$requestedController.'_controller.php';
+
+
+        
 
 
 

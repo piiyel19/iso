@@ -3,7 +3,8 @@
         function templates($file, $vars) {
             ob_start();
             extract($vars);
-            include dirname(__FILE__) . '../../views/templates/' . $file . '.php';
+            //var_dump($file );
+            include '/home/www-data/www/projects/iso/views/templates/' . $file . '.php';
             $buffer = ob_get_contents();
             ob_end_clean();
             return $buffer;
